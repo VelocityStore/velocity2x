@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Velocity Rust - Store</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="container">
+  <header id="header">
+    <div class="logo">VELOCITY</div>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="shop.html" class="active">Store</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+    <a href="/auth/discord" class="login-btn"><i class="fab fa-discord"></i> Login with Discord</a>
+  </header>
+
+  <section id="store">
+    <div class="container">
+      <h2 class="store-title">Premium Store</h2>
+      <p class="store-subtitle">Enhance your gameplay with exclusive perks</p>
+
+      <div class="store-grid">
+
+        <div class="store-card">
+          <span style="
+            position:absolute;
+            top:-16px;
+            right:20px;
+            background:#ff6200;
+            color:white;
+            font-weight:800;
+            padding:6px 14px;
+            border-radius:20px;
+            font-size:0.85rem;
+            box-shadow:0 0 18px rgba(255,98,0,0.7);
+          ">POPULAR</span>
+
+          <h3 class="store-name">VIP</h3>
+          <div class="store-price">$8.99</div>
+          <p class="store-description">Premium VIP for one month</p>
+
+          <ul class="store-features">
+            <li><i class="fas fa-check"></i> Priority queue access</li>
+            <li><i class="fas fa-check"></i> VIP chat badge</li>
+            <li><i class="fas fa-check"></i> VIP-only events</li>
+            <li><i class="fas fa-check"></i> Custom kits</li>
+          </ul>
+
+          <button class="store-buy add-to-cart"
+            data-name="VIP"
+            data-price="8.99"
+            data-link="https://discord.gg/velocityrust">
+            Add to cart
+          </button>
+        </div>
+
+        <div class="store-card">
+          <span style="
+            position:absolute;
+            top:-16px;
+            right:20px;
+            background:#0066ff;
+            color:white;
+            font-weight:800;
+            padding:6px 14px;
+            border-radius:20px;
+            font-size:0.85rem;
+            box-shadow:0 0 18px rgba(0,102,255,0.7);
+          ">BEST VALUE</span>
+
+          <h3 class="store-name">Queue Skip</h3>
+          <div class="store-price">$5.99</div>
+          <p class="store-description">Skip the queue for one month</p>
+
+          <ul class="store-features">
+            <li><i class="fas fa-check"></i> Instant access</li>
+            <li><i class="fas fa-check"></i> Skip waiting times</li>
+            <li><i class="fas fa-check"></i> Priority on wipe</li>
+            <li><i class="fas fa-check"></i> Peak-hour bypass</li>
+          </ul>
+
+          <button class="store-buy add-to-cart"
+            data-name="Queue Skip"
+            data-price="5.99"
+            data-link="https://discord.gg/velocityrust"
+            style="background:#0066ff;">
+            Add to cart
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding: 180px 0 160px; background: transparent;">
+    <div class="container">
+      <h2 class="store-title">Contact Us</h2>
+      <p class="store-subtitle">Community, support & reports</p>
+
+      <div class="store-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1200px;">
+
+        <a href="https://discord.gg/velocityrust" target="_blank" class="store-card" style="text-decoration:none;">
+          <div style="display:flex; align-items:center; gap:14px; margin-bottom:14px;">
+            <i class="fab fa-discord" style="font-size:1.6rem; color:#5865F2;"></i>
+            <h3 class="store-name" style="font-size:1.9rem; margin:0;">Discord</h3>
+          </div>
+          <p class="store-description">Join the community, get updates and live support.</p>
+        </a>
+
+        <a href="https://steamcommunity.com/groups/velocity" target="_blank" class="store-card" style="text-decoration:none;">
+          <div style="display:flex; align-items:center; gap:14px; margin-bottom:14px;">
+            <i class="fab fa-steam" style="font-size:1.6rem; color:#00adee;"></i>
+            <h3 class="store-name" style="font-size:1.9rem; margin:0;">Steam Group</h3>
+          </div>
+          <p class="store-description">Follow our official Steam group.</p>
+        </a>
+
+        <a href="https://discord.gg/velocityrust" target="_blank" class="store-card" style="text-decoration:none;">
+          <div style="display:flex; align-items:center; gap:14px; margin-bottom:14px;">
+            <i class="fas fa-exclamation-triangle" style="font-size:1.5rem; color:#ff4d4d;"></i>
+            <h3 class="store-name" style="font-size:1.9rem; margin:0;">Report Cheater</h3>
+          </div>
+          <p class="store-description">Help us keep Velocity fair and cheat-free.</p>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">VLTM</div>
+      <p class="footer-text">© 2026 Velocity Rust Server. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+<div class="cart-icon" onclick="toggleCart()">
+  🛒
+  <span id="cart-count">0</span>
+</div>
+
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-header">
+    <h2>Shopping Basket</h2>
+    <button onclick="toggleCart()">✕</button>
+  </div>
+
+  <div id="cart-items"></div>
+
+  <div class="order-summary">
+    <div class="summary-line">
+      <span>Total</span>
+      <span id="total">$0.00</span>
+    </div>
+
+    <button class="checkout-btn" onclick="checkout()">
+      Proceed to Checkout
+    </button>
+
+    <p class="secure">Secure checkout powered by PayNow</p>
+  </div>
+</div>
+
+<script>
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let isLoggedIn = false;
+
+  function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+
+  function renderCart() {
+    const container = document.getElementById("cart-items");
+    const totalEl = document.getElementById("total");
+    const countEl = document.getElementById("cart-count");
+    if (!container || !totalEl || !countEl) return;
+
+    container.innerHTML = "";
+    let total = 0;
+
+    const groups = {};
+    cart.forEach(function (item) {
+      const key = item.name + "|" + item.link;
+      if (!groups[key]) {
+        groups[key] = {
+          name: item.name,
+          price: item.price,
+          link: item.link,
+          qty: 0
+        };
+      }
+      groups[key].qty += 1;
+    });
+
+    const keys = Object.keys(groups);
+    keys.forEach(function (key) {
+      const item = groups[key];
+      total += item.price * item.qty;
+      container.innerHTML += `
+        <div class="cart-item" data-name="${item.name}" data-link="${item.link}">
+          <strong>${item.name}</strong>
+          <div>$${item.price.toFixed(2)} x ${item.qty}</div>
+          <div style="display:flex;align-items:center;gap:6px;margin-top:6px;">
+            <button class="qty-minus" style="background:none;border:1px solid #ff6200;color:#ff6200;border-radius:4px;width:26px;height:26px;cursor:pointer;">-</button>
+            <span class="qty-display">${item.qty}</span>
+            <button class="qty-plus" style="background:#ff6200;border:none;color:white;border-radius:4px;width:26px;height:26px;cursor:pointer;">+</button>
+            <button class="remove-all" style="margin-left:10px;color:red;background:none;border:none;cursor:pointer;">
+              Remove
+            </button>
+          </div>
+        </div>
+      `;
+    });
+
+    totalEl.innerText = "$" + total.toFixed(2);
+    countEl.innerText = cart.length;
+
+    container.querySelectorAll(".cart-item").forEach(function (itemEl) {
+      const name = itemEl.getAttribute("data-name");
+      const link = itemEl.getAttribute("data-link");
+      const plus = itemEl.querySelector(".qty-plus");
+      const minus = itemEl.querySelector(".qty-minus");
+      const removeBtn = itemEl.querySelector(".remove-all");
+      if (plus) {
+        plus.onclick = function () {
+          changeQuantity(name, link, 1);
+        };
+      }
+      if (minus) {
+        minus.onclick = function () {
+          changeQuantity(name, link, -1);
+        };
+      }
+      if (removeBtn) {
+        removeBtn.onclick = function () {
+          removeAllOfItem(name, link);
+        };
+      }
+    });
+  }
+
+  function changeQuantity(name, link, delta) {
+    if (delta > 0) {
+      const existing = cart.find(function (i) {
+        return i.name === name && i.link === link;
+      });
+      if (!existing) return;
+      cart.push({ name: existing.name, price: existing.price, link: existing.link });
+    } else {
+      const index = cart.findIndex(function (i) {
+        return i.name === name && i.link === link;
+      });
+      if (index >= 0) {
+        cart.splice(index, 1);
+      }
+    }
+    saveCart();
+    renderCart();
+  }
+
+  function removeAllOfItem(name, link) {
+    cart = cart.filter(function (i) {
+      return !(i.name === name && i.link === link);
+    });
+    saveCart();
+    renderCart();
+  }
+
+  function toggleCart(forceOpen) {
+    if (!isLoggedIn) {
+      alert("Please log in to view your cart.");
+      return;
+    }
+    const drawer = document.getElementById("cart-drawer");
+    const overlay = document.getElementById("cart-overlay");
+    if (forceOpen === true) {
+      drawer.classList.add("open");
+      overlay.classList.add("show");
+      return;
+    }
+    drawer.classList.toggle("open");
+    overlay.classList.toggle("show");
+  }
+
+  function checkout() {
+    if (cart.length === 0) {
+      alert("Your cart is empty.");
+      return;
+    }
+
+    if (cart.length === 1 && cart[0].link) {
+      window.location.href = cart[0].link;
+      return;
+    }
+
+    alert("You need to create a PayNow cart link for multiple items.");
+  }
+
+  function setupButtons() {
+    const buttons = document.querySelectorAll(".add-to-cart");
+    buttons.forEach(function (button) {
+      if (!isLoggedIn) {
+        button.classList.add("disabled");
+        button.disabled = true;
+        button.textContent = "Login to add";
+        button.onclick = function () {
+          alert("Please log in to add items to your cart.");
+        };
+      } else {
+        button.classList.remove("disabled");
+        button.disabled = false;
+        button.textContent = "Add to cart";
+        button.onclick = function () {
+          const name = this.dataset.name;
+          const price = parseFloat(this.dataset.price);
+          const link = this.dataset.link;
+          cart.push({ name, price, link });
+          saveCart();
+          renderCart();
+          toggleCart(true);
+        };
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    fetch("/api/link-status")
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        isLoggedIn = !!(data && data.discord);
+
+        var btn = document.querySelector(".login-btn");
+        if (btn && data && data.discord) {
+          var label = "Discord user";
+          if (data.steam) {
+            if (data.steam.personaName) {
+              label = data.steam.personaName;
+            } else if (data.steam.steamId) {
+              label = data.steam.steamId;
+            }
+          } else if (data.discord.username) {
+            label = data.discord.username;
+            if (data.discord.discriminator) {
+              label += "#" + data.discord.discriminator;
+            }
+          }
+          btn.innerHTML = '<i class="fab fa-discord"></i> ' + label;
+          btn.href = "/auth/logout";
+        }
+
+        setupButtons();
+        if (isLoggedIn) {
+          renderCart();
+          if (cart.length > 0) {
+            toggleCart(true);
+          }
+        }
+      })
+      .catch(function () {
+        isLoggedIn = false;
+        setupButtons();
+      });
+  });
+</script>
+
+</body>
+</html>

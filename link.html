@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Link Accounts - Velocity</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="container">
+  <header id="header">
+    <div class="logo">VELOCITY</div>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="shop.html">Store</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+    <a href="/auth/discord" class="login-btn"><i class="fab fa-discord"></i> Login with Discord</a>
+  </header>
+
+  <section class="link-section">
+    <h1 class="link-title">Link your accounts</h1>
+    <p class="link-subtitle">Connect your Steam and Discord so we can identify you in-game.</p>
+
+    <div class="link-list">
+      <a href="/auth/steam" class="link-card link-card-active">
+        <div class="link-card-left">
+          <i class="fab fa-steam"></i>
+          <div>
+            <div class="link-card-title">Log in via Steam</div>
+            <div class="link-card-text" id="steam-status">Not linked</div>
+          </div>
+        </div>
+        <div class="link-card-radio"></div>
+      </a>
+
+      <a href="/auth/discord?redirect=/link.html" class="link-card">
+        <div class="link-card-left">
+          <i class="fab fa-discord"></i>
+          <div>
+            <div class="link-card-title">Link your Discord account</div>
+            <div class="link-card-text" id="discord-status">Not linked</div>
+          </div>
+        </div>
+        <div class="link-card-radio"></div>
+      </a>
+    </div>
+
+    <div class="link-saved" id="link-saved" style="display:none;">
+      Accounts linked and saved.
+    </div>
+  </section>
+</div>
+
+<script>
+  fetch("/api/link-status")
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (data) {
+      if (!data) return;
+      var steamStatus = document.getElementById("steam-status");
+      var discordStatus = document.getElementById("discord-status");
+      var saved = document.getElementById("link-saved");
+      if (data.steam && steamStatus) {
+        steamStatus.textContent = "Linked as " + data.steam.steamId;
+      }
+      if (data.discord && discordStatus) {
+        var label = data.discord.username;
+        if (data.discord.discriminator) {
+          label += "#" + data.discord.discriminator;
+        }
+        discordStatus.textContent = "Linked as " + label;
+      }
+      if (data.steam && data.discord && saved) {
+        saved.style.display = "block";
+      }
+    })
+    .catch(function () {});
+</script>
+
+</body>
+</html>
+
